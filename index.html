@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -7,141 +6,127 @@
   <title>Ordem de Serviço</title>
 
   <style>
-    /* ========= Design tokens ========= */
     :root{
       --bg: #e8fffb;
-      --brand-dark: #013d35;
+      --brand-dark: #013d35;   /* mesmo tom do título */
       --brand-mid: #3db7ac;
-      --brand-light: #baf2ec;
-      --text: #0b1f1e;
       --white: #fff;
+      --text: #0b1f1e;
       --radius-lg: 16px;
       --radius-md: 12px;
       --radius-sm: 8px;
       --shadow: 0 8px 24px rgba(0,0,0,.08);
     }
-
-    /* ========= Reset & base ========= */
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
+    *{ box-sizing: border-box; }
+    html,body{ height:100%; }
     body{
-      margin: 0;
-      font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;
-      color: var(--text);
-      background: var(--bg);
-      -webkit-text-size-adjust: 100%;
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+      -webkit-text-size-adjust:100%;
     }
+    .app{ max-width:680px; margin:16px auto; padding:16px; }
 
-    /* ========= Container app ========= */
-    .app{
-      max-width: 680px;   /* limita no desktop */
-      margin: 16px auto;  /* centraliza de forma fluida */
-      padding: 16px;
-    }
-
-    /* ========= Header ========= */
     .card-header{
-      background: var(--brand-dark);
-      color: var(--white);
-      padding: 20px 16px;
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow);
+      background:var(--brand-dark);
+      color:var(--white);
+      padding:20px 16px;
+      border-radius:var(--radius-lg);
+      box-shadow:var(--shadow);
+      text-align:center; /* centralizado */
     }
-    .title{
-      margin: 0 0 4px 0;
-      font-size: clamp(22px, 5vw, 36px);
-      letter-spacing: .5px;
-    }
-    .subtitle{
-      margin: 0;
-      opacity: .9;
-      font-weight: 600;
-      font-size: clamp(14px, 3.4vw, 18px);
-    }
+    .title{ margin:0 0 4px; font-size:clamp(22px,5vw,36px); letter-spacing:.5px; }
+    .subtitle{ margin:0; opacity:.9; font-weight:600; font-size:clamp(14px,3.4vw,18px); }
 
-    /* ========= Section title ========= */
     .section-title{
-      margin: 20px 0 8px;
-      background: var(--brand-mid);
-      color: #0b1f1e;
-      font-weight: 800;
-      letter-spacing: .5px;
-      padding: 10px 14px;
-      border-radius: var(--radius-md);
+      margin:20px 0 8px;
+      background:#3db7ac;
+      color:#0b1f1e;
+      font-weight:800;
+      letter-spacing:.5px;
+      padding:10px 14px;
+      border-radius:var(--radius-md);
     }
 
-    /* ========= Form card ========= */
-    .card{
-      background: var(--white);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow);
-      padding: 16px;
-    }
+    .card{ background:var(--white); border-radius:var(--radius-lg); box-shadow:var(--shadow); padding:16px; }
+    .field{ margin-bottom:14px; }
+    .label{ display:block; font-weight:700; margin-bottom:8px; }
 
-    /* ========= Fields ========= */
-    .field{
-      margin-bottom: 14px;
-    }
-    .label{
-      display: block;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
     .control{
-      width: 100%;
-      min-height: 44px;      /* evita zoom no iOS */
-      font-size: 16px;       /* evita zoom no iOS */
-      padding: 10px 12px;
-      border: 1px solid #cfd8dc;
-      border-radius: var(--radius-sm);
-      background: #f9fafa;
-      outline: none;
+      display:block;
+      width:100%;
+      min-height:44px;         /* evita zoom no iOS */
+      font-size:16px;          /* evita zoom no iOS */
+      padding:10px 12px;
+      border:1px solid #cfd8dc;
+      border-radius:var(--radius-sm);
+      background:#f9fafa;
+      outline:none;
     }
     .control:focus{
-      border-color: var(--brand-mid);
-      box-shadow: 0 0 0 3px rgba(61,183,172,.25);
-      background: #fff;
+      border-color:var(--brand-mid);
+      box-shadow:0 0 0 3px rgba(61,183,172,.25);
+      background:#fff;
     }
 
-    /* ========= Radio group ========= */
+    /* Normalização extra para o datetime-local no iOS (largura igual) */
+    input[type="datetime-local"].control{
+      -webkit-appearance: none;
+      appearance: none;
+      max-width:100%;
+      margin:0;
+      padding-right:12px;
+    }
+    input[type="datetime-local"]::-webkit-datetime-edit,
+    input[type="datetime-local"]::-webkit-date-and-time-value{
+      text-align:left; padding:0; margin:0;
+    }
+
     .radio-group{
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
-      gap: 10px;
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:10px;
     }
     .radio-chip{
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 12px;
-      border: 1px solid #cfd8dc;
-      border-radius: var(--radius-sm);
-      background: #f9fafa;
-      min-height: 44px;
-      font-size: 16px;   /* evita zoom no iOS */
+      display:flex; align-items:center; gap:8px;
+      padding:10px 12px;
+      border:1px solid #cfd8dc;
+      border-radius:var(--radius-sm);
+      background:#f9fafa;
+      min-height:44px; font-size:16px;
     }
-    .radio-chip input{
-      width: 18px; height: 18px;
-    }
+    .radio-chip input{ width:18px; height:18px; }
 
-    /* ========= Responsive tweaks ========= */
-    @media (max-width: 420px){
-      .app{ padding: 12px; }
-      .radio-group{
-        grid-template-columns: 1fr; /* empilha os rádios em telas muito pequenas */
-      }
+    .actions{ margin-top:8px; }
+    .btn{
+      width:100%;
+      border:0;
+      border-radius:12px;
+      padding:14px 16px;
+      font-weight:800;
+      font-size:16px;
+      color:#fff;
+      background:var(--brand-dark);   /* mesmo verde do título */
+      box-shadow:0 6px 14px rgba(1,61,53,.2);
+      cursor:pointer;
+    }
+    .btn:hover{ filter:brightness(1.06); }
+    .btn:active{ transform:translateY(1px); }
+
+    @media (max-width:420px){
+      .app{ padding:12px; }
+      .radio-group{ grid-template-columns:1fr; }
     }
   </style>
 </head>
 <body>
   <main class="app">
-    <!-- Cabeçalho -->
     <header class="card-header">
       <h1 class="title">ORDEM DE SERVIÇO</h1>
       <p class="subtitle">Abertura / Encerramento</p>
     </header>
 
-    <!-- Formulário -->
     <section class="card" aria-label="Formulário de OS">
       <form action="#" method="post" novalidate>
         <!-- DATA -->
@@ -156,45 +141,36 @@
         <div class="field">
           <div class="radio-group" role="radiogroup" aria-labelledby="tipo-os-label">
             <span id="tipo-os-label" class="sr-only" aria-hidden="true"></span>
-            <label class="radio-chip">
-              <input type="radio" name="tipoOS" value="corretiva" required />
-              <span>Corretiva</span>
-            </label>
-            <label class="radio-chip">
-              <input type="radio" name="tipoOS" value="preventiva" />
-              <span>Preventiva</span>
-            </label>
-            <label class="radio-chip">
-              <input type="radio" name="tipoOS" value="inspecao" />
-              <span>Inspeção</span>
-            </label>
+            <label class="radio-chip"><input type="radio" name="tipoOS" value="corretiva" required /><span>Corretiva</span></label>
+            <label class="radio-chip"><input type="radio" name="tipoOS" value="preventiva" /><span>Preventiva</span></label>
+            <label class="radio-chip"><input type="radio" name="tipoOS" value="inspecao" /><span>Inspeção</span></label>
           </div>
         </div>
 
-        <!-- PLACA -->
+        <!-- PLACA (input + datalist) -->
         <h2 class="section-title">PLACA</h2>
         <div class="field">
-          <label for="listaPlacas" class="label">Selecione a placa</label>
-          <select id="listaPlacas" name="listaPlacas" class="control" required>
-            <option value="" selected disabled>Selecione a Placa</option>
-            <option value="EMP0007">EMP0007</option>
-            <option value="EMP0008">EMP0008</option>
-            <option value="EMP0009">EMP0009</option>
-            <option value="EMP0011">EMP0011</option>
-            <option value="EMP0012">EMP0012</option>
-            <option value="EMP0016">EMP0016</option>
-            <option value="EMP0039">EMP0039</option>
-            <option value="EMP0046">EMP0046</option>
-            <option value="EMP0053">EMP0053</option>
-            <option value="EMP0078">EMP0078</option>
-            <option value="EMP0090">EMP0090</option>
-            <option value="EMP0091">EMP0091</option>
-            <option value="EMP0093">EMP0093</option>
-            <option value="EMP0095">EMP0095</option>
-            <option value="EMP0096">EMP0096</option>
-            <option value="EMP0098">EMP0098</option>
-            <option value="EMP0099">EMP0099</option>
-          </select>
+          <label for="placa" class="label">Selecione ou digite a placa</label>
+          <input id="placa" name="placa" class="control" list="placas" required placeholder="Digite ou escolha" />
+          <datalist id="placas">
+            <option value="EMP0007">
+            <option value="EMP0008">
+            <option value="EMP0009">
+            <option value="EMP0011">
+            <option value="EMP0012">
+            <option value="EMP0016">
+            <option value="EMP0039">
+            <option value="EMP0046">
+            <option value="EMP0053">
+            <option value="EMP0078">
+            <option value="EMP0090">
+            <option value="EMP0091">
+            <option value="EMP0093">
+            <option value="EMP0095">
+            <option value="EMP0096">
+            <option value="EMP0098">
+            <option value="EMP0099">
+          </datalist>
         </div>
 
         <!-- HORÍMETRO -->
@@ -204,37 +180,22 @@
           <input id="horimetro" type="number" class="control" placeholder="Inserir km/horímetro do equipamento" inputmode="numeric" required />
         </div>
 
-        <!-- CONJUNTO -->
+        <!-- CONJUNTO (input + datalist) -->
         <h2 class="section-title">CONJUNTO</h2>
         <div class="field">
-          <label for="listaConjunto" class="label">Selecione o conjunto</label>
-          <select id="listaConjunto" name="listaConjunto" class="control" required>
-            <option value="" selected disabled>Selecione o Conjunto</option>
-            <option>AJUSTES</option>
-            <option>CHASSI</option>
-            <option>CLAMP</option>
-            <option>CUBOS E FREIOS</option>
-            <option>DIREÇÃO</option>
-            <option>DIVERSOS</option>
-            <option>ELÉTRICA</option>
-            <option>INSPEÇÃO</option>
-            <option>MOTOR</option>
-            <option>ÓLEO</option>
-            <option>PNEUS E RODAS</option>
-            <option>PREVENTIVA 250H</option>
-            <option>PREVENTIVA 500H</option>
-            <option>PREVENTIVA 1000H</option>
-            <option>RADIADOR</option>
-            <option>SISTEMA DE ARREFECIMENTO</option>
-            <option>SISTEMA DE COMBUSTÍVEL</option>
-            <option>SISTEMA DE FREIOS</option>
-            <option>SISTEMA HIDRÁULICO</option>
-            <option>SISTEMA PNEUMÁTICO</option>
-            <option>SUSPENSÃO</option>
-            <option>TORRE</option>
-            <option>TRANSMISSÃO</option>
-            <option>VAZAMENTOS</option>
-          </select>
+          <label for="conjunto" class="label">Selecione ou digite o conjunto</label>
+          <input id="conjunto" name="conjunto" class="control" list="conjuntos" required placeholder="Digite ou escolha" />
+          <datalist id="conjuntos">
+            <option value="AJUSTES"><option value="CHASSI"><option value="CLAMP">
+            <option value="CUBOS E FREIOS"><option value="DIREÇÃO"><option value="DIVERSOS">
+            <option value="ELÉTRICA"><option value="INSPEÇÃO"><option value="MOTOR">
+            <option value="ÓLEO"><option value="PNEUS E RODAS"><option value="PREVENTIVA 250H">
+            <option value="PREVENTIVA 500H"><option value="PREVENTIVA 1000H"><option value="RADIADOR">
+            <option value="SISTEMA DE ARREFECIMENTO"><option value="SISTEMA DE COMBUSTÍVEL">
+            <option value="SISTEMA DE FREIOS"><option value="SISTEMA HIDRÁULICO">
+            <option value="SISTEMA PNEUMÁTICO"><option value="SUSPENSÃO"><option value="TORRE">
+            <option value="TRANSMISSÃO"><option value="VAZAMENTOS">
+          </datalist>
         </div>
 
         <!-- DEFEITO -->
@@ -243,9 +204,12 @@
           <label for="defeito" class="label">Descrição da ocorrência</label>
           <input id="defeito" type="text" class="control" placeholder="Descrição da ocorrência" required />
         </div>
+
+        <div class="actions">
+          <button class="btn" type="submit">Registrar</button>
+        </div>
       </form>
     </section>
   </main>
 </body>
 </html>
-

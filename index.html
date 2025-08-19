@@ -156,6 +156,17 @@
           <input id="dt-os" class="control" type="datetime-local" required placeholder="dd/mm/aaaa --:--"/>
         </div>
 
+        <h2 class="section-title">LOCAL</h2>
+        <div class="field">
+            <label for="local" class="label"></label>
+                <input id="local"" name="local" class="control" list="localização" required placeholder="Digite ou escolha" />
+                <datalist id="localização">
+                    <option value="FÁBRICA LINHA 2 - LPL">
+                    <option value="INTERMODAL - PDN">
+                </datalist>
+            </div>
+        </div>
+
         <!-- TIPO DE OS -->
         <h2 class="section-title">TIPO DE OS</h2>
         <div class="field">
@@ -226,10 +237,11 @@
         </div>
 
         <div class="actions">
-          <button class="btn" type="submit">Registrar</button>
+          <button class="btn" id="btnRef" type="submit">Registrar</button>
         </div>
       </form>
     </section>
-  </main>
+  </main> 
+
 </body>
 </html>

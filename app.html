@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Sua Loja — Menu</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #e8fffb;
+    --brand-dark: #0b4c59;      /* topo azul petróleo */
+    --brand-mid: #019A8B;       /* verde água do rodapé */
+    --tile: #e7f2f1;            /* blocos claros */
+    --text: #0c1f1e;
+    --muted: #6a7b7a;
+    --radius-lg: 16px;
+    --radius-md: 12px;
+    --shadow: 0 8px 24px rgba(0,0,0,.08);
+  }
+
+  /* Layout geral em “moldura” de celular */
+    body{
+        margin:0;
+        font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;
+        color:var(--text);
+        background:var(--bg);
+        -webkit-text-size-adjust:100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        }
+
+  .phone{
+    width:min(680px);
+    max-height: 1150px;
+    aspect-ratio: 6/16;
+    background:#fff;
+    border-radius:38px;   
+    position:relative;
+    overflow:hidden;
+  }
+
+  .app{ max-width:680px; margin:16px auto; padding:16px; }
+  /* “entalhe” câmera/speaker só pra dar charme */
+  .notch{
+    position:absolute; inset:10px auto auto 50%;
+    width:38%;
+    height:26px; transform:translateX(-50%);
+  
+    
+  }
+
+  .screen{
+    position:absolute; inset:54px 14px 14px;
+    border-radius:24px;
+    overflow:hidden;
+    background: var(--bg);
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.06);
+    display:flex; flex-direction:column;
+  }
+
+  /* topo */
+  .topbar{
+    background: var(--brand-dark);
+    color:#fff;
+    padding:44px 18px 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .brand{
+    display:flex; align-items:center; gap:12px;
+    font-size: clamp(20px, 6vw, 28px);
+    line-height:1;
+    justify-content: center;
+  }
+  .brand .logo{
+    width:26px; height:26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .brand .name{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;
+    font-weight:bold;
+  }
+
+  .name:hover{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;
+    font-weight:bold;
+    font-size: 42px;
+  }
+  /* faixa abaixo do topo (onde ficam os blocos) */
+  .content{
+    background:linear-gradient(#0f6f7e 0 854px, transparent 64px);
+    padding:0 12px 12px;
+    flex:1; display:flex; flex-direction:column;
+  }
+
+  /* grade de botões */
+  .grid{
+    margin-top:28px;
+    display:grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap:12px;
+  }
+
+  .tile{
+    background: var(--tile);
+    border-radius: 12px;
+    padding: 34px 10px 35px;
+    box-shadow: var(--shadow);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center;
+    transition: transform .08s ease, box-shadow .2s ease;
+    min-height: 90px;
+    text-decoration: none;
+    color: inherit;
+    font-weight: bold;    
+  }
+
+  .tile:active{ transform: scale(.98); }
+  .tile:hover{ box-shadow: 0 10px 26px rgba(0,0,0,.12); }
+  .tile:hover{ background-color: rgb(21, 233, 215);}
+
+  .icon{
+    width:88px; height:88px;
+    border-radius:50%;
+    background:#0f6f7e;        /* círculo escuro */
+    display:grid; place-items:center;
+    margin-bottom:10px;
+  }
+  .icon svg{ width:42px; height:42px; fill:#fff; }
+
+  .icon:hover svg{ width:82px; height:82px; fill:#fff; }
+
+  .icon:hover{width:120px; height:120px;}
+  
+  .label{
+    font-size:.88rem;
+    color:#223;
+  }
+
+  .label:hover{
+    font-size:.98rem;
+    color:#223;
+  }
+
+  /* bloco Youtube sozinho na última linha */
+  .grid .tile.youtube{
+    grid-column: 1 / span 3;
+    max-width: 56%;
+    margin-inline:auto;
+  }
+
+  /* rodapé verde (área vazia no layout original) */
+  .tail{
+    margin-top:auto;
+    background: var(--brand-mid);
+    height: 110px;
+    border-radius: 12px;
+  }
+
+  /* Responsividade pequena */
+  @media (max-width:360px){
+    .icon{ width:40px;height:40px }
+    .icon svg{ width:20px;height:20px }
+    .tile{ min-height:84px; padding:12px 8px }
+    .label{ font-size:.82rem }
+  }
+</style>
+</head>
+<body>
+  <div class="phone">
+    <div class="notch" aria-hidden="true"></div>
+    <div class="screen">
+      <header class="topbar">
+        <div class="brand">
+          <!-- “spinner” simples -->
+          <svg class="logo" viewBox="0 0 24 24" aria-hidden="true">
+           <!-- <g fill="#fff">
+              <circle cx="12" cy="3" r="2"/>
+              <circle cx="12" cy="21" r="2" opacity=".6"/>
+              <circle cx="3" cy="12" r="2" opacity=".7"/>
+              <circle cx="21" cy="12" r="2" opacity=".7"/>
+              <circle cx="5" cy="5" r="2" opacity=".35"/>
+              <circle cx="19" cy="19" r="2" opacity=".35"/>
+              <circle cx="5" cy="19" r="2" opacity=".2"/>
+              <circle cx="19" cy="5" r="2" opacity=".2"/>
+            </g>-->
+          </svg>
+          <div class="name">APP FROTA DEEP</div>
+        </div>
+      </header>
+
+      <main class="content">
+        <section class="grid">
+
+          <!-- 1ª linha -->
+          <a class="tile" href="#">
+            <div class="icon">
+              <!-- info -->
+              <svg viewBox="0 0 24 24"><path fill="white" d="M9 11l3 3L22 4l-1.41-1.42L12 12.17l-2.59-2.58L9 11zM3 6h5v2H3V6zm0 5h5v2H3v-2zm0 5h5v2H3v-2z"/></svg>
+            </div>
+            <div class="label">CHECK-LIST</div>
+          </a>
+
+          <a class="tile" href="#">
+            <div class="icon">
+              <!-- catálogo -->
+              <svg viewBox="0 0 24 24"><path fill="white" d="M19 3h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm-7 0a1 1 0 0 1 1 1h-2a1 1 0 0 1 1-1zm0 14H8v-2h4v2zm4-4H8v-2h8v2z"/></svg>
+            </div>
+            <div class="label">ORDENS DE SERVIÇO</div>
+          </a>
+
+          <a class="tile" href="#">
+            <div class="icon">
+              <!-- cifrão -->
+              <svg viewBox="0 0 24 24"><path fill="white" d="M16 3H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h6v-6h2v6h2a2 2 0 0 0 2-2v-9h-2v-5a2 2 0 0 0-2-2zm-2 8H8V5h6v6z"/></svg>
+            </div>
+            <div class="label">ABASTECIMETOS</div>
+          </a>
+
+          <!-- 2ª linha -->
+          <a class="tile" href="#">
+            <div class="icon">
+              <!-- localização -->
+                <svg viewBox="0 0 24 24">
+                <path fill="white" d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4a2 2 0 0 0 1-1.73zM12 4.15L18.53 8 12 11.85 5.47 8 12 4.15zM5 10.72l6 3.43v6.7l-6-3.42v-6.71zm8 10.13v-6.7l6-3.43v6.71l-6 3.42z"/>
+                </svg>
+            </div>
+            <div class="label">INVENTÁRIO</div>
+          </a>
+
+      
+      
+
+        </section>
+
+        <div class="tail" aria-hidden="true"></div>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

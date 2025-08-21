@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Inventário — Menu</title>
+<style>
+  :root{
+    --bg:#e8fffb; --brand-dark:#0b4c59; --brand-mid:#0b4c59;
+    --tile:#a3e0db; --tile-dark:#a3e0db;
+    --text:#0b1f1e; --shadow:0 8px 24px rgba(0,0,0,.08);
+  }
+  *{box-sizing:border-box} html,body{height:100%}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    display:flex; align-items:center; justify-content:center;
+    padding: clamp(8px, 2vw, 16px);
+  }
+
+  .phone{ width:min(680px, 100%); background:#fff; border-radius:28px; overflow:hidden; box-shadow:0 20px 50px rgba(0,0,0,.18) }
+  .screen{ display:flex; flex-direction:column; min-height:100% }
+
+  .topbar{ background:var(--brand-dark); color:#fff; text-align:center; padding: clamp(18px,5vw,36px) clamp(14px,4vw,24px) }
+  .name{ margin:0; font-weight:800; font-size: clamp(20px, 4.3vw, 32px) }
+
+  .content{ padding: clamp(12px, 3vw, 20px); background: linear-gradient(180deg, #3db7ac 0%, #3db7ac 22%, transparent 22%) }
+
+  /* banner superior */
+  .banner{
+    background: var(--brand-dark); color:#fff; border-radius:14px;
+    padding: clamp(10px, 2.8vw, 14px); text-align:center; box-shadow: var(--shadow);
+  }
+  .banner h2{ margin:0; font-size: clamp(16px, 3.8vw, 22px); font-weight:800 }
+  .login-status{
+    margin-top:6px;
+    display:inline-block;
+    background:#2e7d32; /* verde escuro */
+    color:#fff;
+    font-size: clamp(12px, 3vw, 14px);
+    font-weight:600;
+    padding:4px 10px;
+    border-radius:8px;
+  }
+
+  .grid{
+    margin-top: clamp(12px, 3vw, 20px);
+    display:grid; grid-template-columns: 1fr; gap: clamp(10px, 2.5vw, 16px);
+  }
+
+  a.tile, button.tile{
+    width:100%;
+    display:flex; align-items:center; justify-content:center;
+    background: var(--tile-dark); /* tom mais escuro */
+    border-radius: 14px;
+    padding: clamp(18px, 5vw, 28px);
+    text-decoration:none; color:inherit;
+    box-shadow: var(--shadow);
+    font-weight:800; letter-spacing:.3px;
+    font-size: clamp(16px, 3.8vw, 22px);
+    transition: transform .08s ease, box-shadow .2s ease, background .2s ease;
+    border:0; cursor:pointer;
+  }
+  a.tile:hover, button.tile:hover{ box-shadow:0 12px 28px rgba(0,0,0,.12); background:#c2d8d8 }
+  a.tile:active, button.tile:active{ transform: scale(.985) }
+  a.tile *{ pointer-events:none }
+
+  /* variantes coloridas */
+  .tile.yellow{ background:#fcd96d }
+  .tile.cyan{ background:#a3e0db }
+  .tile.gray{ background:#a3e0db }
+
+  .tail{ height: clamp(60px, 14vw, 110px); background:var(--brand-mid); border-radius:0 0 20px 20px; margin-top: 16px;}
+
+</style>
+</head>
+<body>
+  <div class="phone">
+    <div class="screen">
+      <header class="topbar">
+        <h1 class="name">APP FROTA DEEP</h1>
+      </header>
+
+      <main class="content">
+        <!-- Cabeçalho Inventário -->
+        <div class="banner">
+          <h2>INVENTÁRIO</h2>
+          <span class="login-status">✅ Login realizado</span>
+        </div>
+
+        <!-- Ações -->
+        <section class="grid" style="margin-top: clamp(14px,3.2vw,22px)">
+          <button class="tile" onclick="abrirContagem(true)">📋 Abrir Nova Contagem</button>
+          <button class="tile" onclick="abrirContagem(false)">🔄 Continuar Contagem</button>
+          <button class="tile yellow" onclick="menuContagensAbertas()">⏳ Contagens em Aberto</button>
+          <button class="tile cyan" onclick="menuConsultas()">🔍 Consultar Contagens Encerradas</button>
+          <button class="tile gray" onclick="fazerLogout()">🚪 Sair</button>
+          <a class="tile" href="./index.html">⬅️ Voltar ao início</a>
+        </section>
+
+        <div class="tail" aria-hidden="true"></div>
+        
+      </main>
+    </div>
+  </div>
+
+  <script>
+    // Preenche nome do usuário se salvo no localStorage
+    (function(){
+      try{
+        const usuario = localStorage.getItem('usuarioNome') || '';
+        if(usuario){
+          document.querySelector('.login-status').textContent = '✅ Login realizado — ' + usuario;
+        }
+      }catch(e){}
+    })();
+  </script>
+</body>
+</html>

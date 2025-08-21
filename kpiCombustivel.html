@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Abastecimentos — Consulta</title>
+<style>
+  :root{
+    --bg:#e8fffb; --brand-dark:#0b4c59; --brand-mid:#3db7ac; --white:#fff; --text:#0b1f1e;
+    --shadow:0 8px 24px rgba(0,0,0,.08);
+    --br-lg:16px; --br-md:12px; --br-sm:10px;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    display:flex; align-items:center; justify-content:center;
+    padding: clamp(8px, 2vw, 16px);
+  }
+
+  /* “app” no mesmo tamanho dos formulários anteriores */
+  .app{ width:min(680px, 100%); margin:auto; }
+
+  .card-header{
+    background:var(--brand-dark); color:var(--white);
+    padding: clamp(18px,5vw,28px) clamp(14px,4vw,20px);
+    border-radius: var(--br-lg);
+    box-shadow: var(--shadow);
+    text-align:center;
+  }
+  .title{ margin:0; font-weight:900; letter-spacing:.4px; font-size:clamp(22px,5vw,34px) }
+
+  .panel{
+    margin-top:12px;
+    background:var(--white);
+    border-radius: var(--br-lg);
+    box-shadow: var(--shadow);
+    overflow:hidden;
+  }
+
+  /* faixa de topo verdinha (igual aos outros) */
+  .panel::before{
+    content:""; display:block; height:20px; background:var(--brand-mid);
+  }
+
+  /* filtros */
+  .filters{ padding: 12px; display:grid; gap:10px; }
+  .filters .row{ display:grid; grid-template-columns:1fr 1fr; gap:10px }
+  .filters .row-3{ grid-template-columns: repeat(3, 1fr); }
+  .filters .row-2{ grid-template-columns: repeat(2, 1fr); }
+  @media (max-width:480px){
+    .filters .row, .filters .row-3, .filters .row-2{ grid-template-columns: 1fr; }
+  }
+
+  .field{ display:flex; flex-direction:column; gap:6px }
+  .label{ font-weight:800; font-size:.9rem }
+  .control{
+    width:100%; min-height:42px; padding:10px 12px; border-radius: var(--br-sm);
+    border:1px solid #cfd8dc; background:#f9fbfb; font-size:15px; outline:none;
+  }
+  .control:focus{ border-color:var(--brand-mid); box-shadow:0 0 0 3px rgba(61,183,172,.22); background:#fff }
+
+  .actions{ display:flex; gap:10px; justify-content: flex-end; margin-top:6px }
+  .btn{
+    border:0; border-radius:12px; padding:10px 14px; font-weight:800; cursor:pointer;
+    background:var(--brand-dark); color:#fff; box-shadow:0 6px 14px rgba(1,61,53,.18);
+  }
+  .btn.secondary{ background:#93b8b5; color:#062f2c }
+
+  /* KPIs */
+  .kpis{
+    margin-top:12px;
+    background:var(--white);
+    border-radius: var(--br-lg);
+    box-shadow: var(--shadow);
+    overflow:hidden;
+  }
+  .kpis::before{ content:""; display:block; height:20px; background:var(--brand-mid); }
+
+  .kpi-grid{ padding:12px; display:grid; gap:12px; grid-template-columns: 1fr 1fr; }
+  @media (max-width:520px){ .kpi-grid{ grid-template-columns:1fr } }
+
+  .kpi{
+    background:#2e6b86; color:#fff;
+    border-radius:14px; padding:12px;
+    box-shadow: 0 10px 22px rgba(0,0,0,.12);
+  }
+  .kpi h4{
+    margin:0 0 8px; font-size:.95rem; font-weight:800; letter-spacing:.2px; opacity:.95;
+  }
+  .kpi-body{
+    display:flex; align-items:center; gap:12px; justify-content:flex-start;
+    padding: 10px 4px 4px;
+  }
+  .kpi .icon{
+    width:42px; height:42px; border-radius:50%;
+    background: rgba(255,255,255,.14); display:grid; place-items:center;
+  }
+  .kpi .icon svg{ width:24px; height:24px; fill:#fff }
+  .kpi .value{
+    font-size: clamp(20px, 5vw, 28px); font-weight:900; letter-spacing:.4px;
+  }
+
+  /* rodapé vazio para respirar (igual aos outros) */
+  .tail{ height: 80px }
+</style>
+</head>
+<body>
+  <main class="app">
+    <header class="card-header">
+      <h1 class="title">ABASTECIMENTOS</h1>
+    </header>
+
+    <!-- FILTROS -->
+    <section class="panel" aria-label="Filtros">
+      <div class="filters">
+        <div class="row-3">
+          <div class="field">
+            <label class="label" for="f-ano">Ano</label>
+            <input id="f-ano" class="control" type="number" inputmode="numeric" placeholder="ex.: 2025">
+          </div>
+          <div class="field">
+            <label class="label" for="f-mes">Mês</label>
+            <input id="f-mes" class="control" type="number" min="1" max="12" placeholder="1 a 12">
+          </div>
+          <div class="field">
+            <label class="label" for="f-dia">Dia</label>
+            <input id="f-dia" class="control" type="number" min="1" max="31" placeholder="1 a 31">
+          </div>
+        </div>
+
+        <div class="row-2">
+          <div class="field">
+            <label class="label" for="f-unidade">Unidade</label>
+            <input id="f-unidade" class="control" list="unidades" placeholder="Digite ou escolha">
+            <datalist id="unidades">
+              <option value="FÁBRICA LINHA 2 - LPL"><option value="INTERMODAL - PDN">
+            </datalist>
+          </div>
+          <div class="field">
+            <label class="label" for="f-comb">Tipo Combustível</label>
+            <input id="f-comb" class="control" list="comb" placeholder="GLP, Diesel, Elétrico…">
+            <datalist id="comb">
+              <option value="GLP"><option value="Diesel"><option value="Elétrico">
+            </datalist>
+          </div>
+        </div>
+
+        <div class="row-2">
+          <div class="field">
+            <label class="label" for="f-modelo">Modelo Veículo</label>
+            <input id="f-modelo" class="control" list="modelos" placeholder="Digite ou escolha">
+            <datalist id="modelos">
+              <option value="07 ton GLP"><option value="16 ton Diesel"><option value="16 ton Elétrica">
+            </datalist>
+          </div>
+          <div class="field">
+            <label class="label" for="f-placa">Placa</label>
+            <input id="f-placa" class="control" list="placas" placeholder="Digite ou escolha">
+            <datalist id="placas">
+              <option value="EMP0007"><option value="EMP0008"><option value="EMP0016"><option value="EMP0099">
+            </datalist>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn secondary" type="button" id="btnLimpar">Limpar</button>
+          <button class="btn" type="button" id="btnAplicar">Aplicar Filtros</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- KPIs -->
+    <section class="kpis" aria-label="Resultados">
+      <div class="kpi-grid">
+        <!-- QTD Placas -->
+        <article class="kpi">
+          <h4>QTD Placas</h4>
+          <div class="kpi-body">
+            <div class="icon">
+              <!-- Ícone de Empilhadeira -->
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M3 16h2a2 2 0 1 0 0 4 2 2 0 0 0 2-2h6a2 2 0 1 0 0 4 2 2 0 0 0 2-2h2a1 1 0 0 0 1-1v-4h1.5a.5.5 0 0 0 .5-.5V6h-2v8H17v-3.2a2 2 0 0 0-.3-1.1l-2.2-3.6A2 2 0 0 0 12.7 5H9a1 1 0 0 0-1 1v7H6a3.99 3.99 0 0 0-3 1.33V16Zm8-9h1.7a.5.5 0 0 1 .43.24L15 10H11V7Z" fill="#fff"/>
+              </svg>
+            </div>
+            <div class="value" id="kpiPlacas">25</div>
+          </div>
+        </article>
+
+        <!-- QTD OS -->
+        <article class="kpi">
+          <h4>QTD OS</h4>
+          <div class="kpi-body">
+            <div class="icon">
+              <!-- tag -->
+              <svg viewBox="0 0 24 24"><path d="M20.59 13.41 12 22 2 12l8.59-8.59A2 2 0 0 1 12.99 3H20v7.01a2 2 0 0 1-.41 1.4zM7.5 7a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" fill="#fff"/></svg>
+            </div>
+            <div class="value" id="kpiOS">247</div>
+          </div>
+        </article>
+
+        <!-- Litros -->
+        <article class="kpi">
+          <h4>Litros</h4>
+          <div class="kpi-body">
+            <div class="icon">
+              <!-- gota -->
+              <svg viewBox="0 0 24 24"><path d="M12 2S5 10 5 14.5A7 7 0 0 0 19 14.5C19 10 12 2 12 2z" fill="#fff"/></svg>
+            </div>
+            <div class="value" id="kpiLitros">19.079</div>
+          </div>
+        </article>
+
+        <!-- Média de Consumo (L) -->
+        <article class="kpi">
+          <h4>Média de Consumo (L)</h4>
+          <div class="kpi-body">
+            <div class="icon">
+              <!-- gráfico de barras -->
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M2 20.5h20" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>
+                <rect x="3"  y="12" width="4" height="8"  rx="1" ry="1" fill="#fff"/>
+                <rect x="10" y="8"  width="4" height="12" rx="1" ry="1" fill="#fff"/>
+                <rect x="17" y="4"  width="4" height="16" rx="1" ry="1" fill="#fff"/>
+              </svg>
+            </div>
+            <div class="value" id="kpiMediaConsumo1">4,98</div>
+          </div>
+        </article>
+
+        <!-- KM Rodado -->
+        <article class="kpi">
+          <h4>KM Rodado</h4>
+          <div class="kpi-body">
+            <div class="icon">
+              <!-- marcador/odômetro -->
+              <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9h-2a7 7 0 1 1-7-7V3zM11 12v-5h2v7h-1l-1-2z" fill="#fff"/></svg>
+            </div>
+            <div class="value" id="kpiKm">95.081</div>
+          </div>
+        </article>
+
+        <!-- Média de Consumo (L) 2 -->
+        <article class="kpi">
+          <h4>Média de Consumo (L)</h4>
+          <div class="kpi-body">
+            <div class="icon">
+              <!-- gráfico de barras (repetido) -->
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M2 20.5h20" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>
+                <rect x="3"  y="12" width="4" height="8"  rx="1" ry="1" fill="#fff"/>
+                <rect x="10" y="8"  width="4" height="12" rx="1" ry="1" fill="#fff"/>
+                <rect x="17" y="4"  width="4" height="16" rx="1" ry="1" fill="#fff"/>
+              </svg>
+            </div>
+            <div class="value" id="kpiMediaConsumo2">4,98</div>
+          </div>
+        </article>
+      </div>
+      <div class="tail" aria-hidden="true"></div>
+    </section>
+  </main>
+
+  <script>
+    // Exemplo: plug para limpar e "aplicar" (substitua pela sua busca real)
+    const ids = sel => document.querySelector(sel);
+    const clearBtn = ids('#btnLimpar');
+    const applyBtn = ids('#btnAplicar');
+    const inputs = ['#f-ano','#f-mes','#f-dia','#f-unidade','#f-comb','#f-modelo','#f-placa'].map(ids);
+
+    clearBtn.addEventListener('click', () => inputs.forEach(i => i.value = ''));
+    applyBtn.addEventListener('click', () => {
+      // Aqui você coletaria os filtros e faria a chamada ao backend
+      const filtros = Object.fromEntries([
+        ['ano', ids('#f-ano').value.trim()],
+        ['mes', ids('#f-mes').value.trim()],
+        ['dia', ids('#f-dia').value.trim()],
+        ['unidade', ids('#f-unidade').value.trim()],
+        ['combustivel', ids('#f-comb').value.trim()],
+        ['modelo', ids('#f-modelo').value.trim()],
+        ['placa', ids('#f-placa').value.trim()],
+      ]);
+      console.log('Aplicar filtros →', filtros);
+
+      // MOCK opcional: atualiza KPIs para mostrar interação (remova depois)
+      ids('#kpiPlacas').textContent = '—';
+      ids('#kpiOS').textContent = '—';
+      ids('#kpiLitros').textContent = '—';
+      ids('#kpiMediaConsumo1').textContent = '—';
+      ids('#kpiKm').textContent = '—';
+      ids('#kpiMediaConsumo2').textContent = '—';
+      // Depois, preencha com os valores retornados da sua API.
+    });
+  </script>
+</body>
+</html>

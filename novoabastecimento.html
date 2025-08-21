@@ -28,34 +28,26 @@
 
      .content{ padding: clamp(12px, 3vw, 20px); background: linear-gradient(180deg, #3db7ac 0%, #3db7ac 24%, transparent 22%) }
 
-  /* faixa "MENU" */
-  .banner{
-    background: var(--brand-dark);
-    color:#fff;
-    border-radius:14px;
-    padding: clamp(20px, 5vw, 28px);
-    text-align:center;
-    font-weight:800;
-    letter-spacing:.4px;
-    font-size: clamp(16px, 3.8vw, 22px);
-    box-shadow: var(--shadow);
-  }
-
   .grid{
     margin-top: clamp(10px, 2.5vw, 16px);
     display:grid; grid-template-columns: 1fr;
     gap: clamp(10px, 2.5vw, 16px);
   }
 
+   .tile{
+	background-color:#3db7ac;
+  }
+
   a.tile{
     display:flex; align-items:center; justify-content:center;
-    background: var(--tile);
+    background-color:#7BD3CB;
     border-radius: 14px;
+    margin-top:8px;
     padding: clamp(20px, 5vw, 28px);
     text-decoration:none; color:inherit;
     box-shadow: var(--shadow);
     font-weight:800; letter-spacing:.3px;
-    font-size: clamp(16px, 3.8vw, 22px);
+    font-size: clamp(16px, 3.8vw, 22px);    
     transition: transform .08s ease, box-shadow .2s ease, background .2s ease;
   }
   a.tile:hover{ box-shadow:0 12px 28px rgba(0,0,0,.12); background:#cfeeed }
@@ -79,14 +71,14 @@
         <!-- DATA -->
         <h2 class="section-title">DATA</h2>
         <div class="field">
-          <label for="dt" class="label">Data/Hora</label>
+          <label for="dt" class="label"></label>
           <input id="dt" class="control" type="datetime-local" required placeholder="dd/mm/aaaa --:--"/>
         </div>
 
         <!-- LOCAL -->
         <h2 class="section-title">LOCAL</h2>
         <div class="field">
-          <label for="local" class="label">Local</label>
+          <label for="local" class="label"></label>
           <input id="local" name="local" class="control" list="lista-locais" required placeholder="Digite ou escolha" />
           <datalist id="lista-locais">
             <option value="FÁBRICA LINHA 2 - LPL">
@@ -97,7 +89,7 @@
         <!-- PLACA -->
         <h2 class="section-title">PLACA</h2>
         <div class="field">
-          <label for="placa" class="label">Placa</label>
+          <label for="placa" class="label"></label>
           <input id="placa" name="placa" class="control" list="lista-placas" required placeholder="Digite ou escolha" />
           <datalist id="lista-placas">
             <option value="EMP0007"><option value="EMP0008"><option value="EMP0009"><option value="EMP0011">
@@ -110,14 +102,14 @@
         <!-- HORÍMETRO -->
         <h2 class="section-title">HORÍMETRO</h2>
         <div class="field">
-          <label for="horimetro" class="label">Horímetro</label>
+          <label for="horimetro" class="label"></label>
           <input id="horimetro" type="number" class="control" placeholder="Inserir km/horímetro do equipamento" inputmode="numeric" required />
         </div>
 
         <!-- COMBUSTÍVEL -->
         <h2 class="section-title">COMBUSTÍVEL</h2>
         <div class="field">
-          <label for="combustivel" class="label">Quantidade</label>
+          <label for="combustivel" class="label"></label>
           <input id="combustivel" type="number" step="any" inputmode="decimal" class="control"
                  placeholder="Insira a quantidade de kg ou litros" required />
         </div>
@@ -126,14 +118,14 @@
           <button class="btn" id="btnEnviar" type="submit">Registrar</button>
         </div>
       </form>
-    </section>
-    <main class="content">
-        <div class="banner"></div>
-        <section class="grid" style="margin-top: clamp(12px,3vw,20px)">        
-          <a class="tile" href="./index.html">⬅️VOLTAR AO MENU</a>
+	  <a class="tile" href="./index.html">⬅️VOLTAR AO MENU</a>
           <a class="tile" href="#">🚪SAIR</a>
-        </section>
-      </main>
+    </section>
+ 
+       
+          
+      
+ 
   </main>
 
   <script>

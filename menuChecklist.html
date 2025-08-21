@@ -6,123 +6,114 @@
 <title>Checklist — Modelos</title>
 <style>
   :root{
-    --bg:#e8fffb; --brand-dark:#0b4c59; --brand-mid:#3db7ac; --text:#0b1f1e;
-    --tile:#ffffff; --tile-brd:#d6e3e3; --shadow:0 10px 28px rgba(0,0,0,.12);
+    --bg:#e8fffb;
+    --brand-dark:#0b4c59;
+    --brand-mid:#3db7ac;
+    --text:#0b1f1e;
+    --tile:#ffffff;
+    --tile-brd:#d6e3e3;
+    --shadow:0 8px 20px rgba(0,0,0,.12);
   }
-  *{ box-sizing:border-box }
-  html,body{ height:100% }
+  *{box-sizing:border-box;margin:0;padding:0}
   body{
-    margin:0; background:var(--bg); color:var(--text);
-    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-    display:flex; align-items:center; justify-content:center;
-    padding: clamp(8px,2vw,16px);
+    font-family: Inter, system-ui, sans-serif;
+    background:var(--bg);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:100vh;
+    padding:10px;
+    color:var(--text);
   }
-
-  .phone{ width:min(680px,100%); background:#fff; border-radius:28px; overflow:hidden; box-shadow:0 20px 50px rgba(0,0,0,.18) }
-  .screen{ display:flex; flex-direction:column; min-height:100% }
-
-  .topbar{ background:var(--brand-dark); color:#fff; text-align:center; padding: clamp(18px,5vw,36px) clamp(14px,4vw,24px) }
-  .title{ margin:0; font-weight:800; font-size: clamp(20px,4.3vw,32px) }
-
-  .content{
-    padding: clamp(12px,3vw,20px);
-    background:linear-gradient(180deg, var(--brand-mid) 0%, var(--brand-mid) 20%, transparent 20%);
-  }
-
-  /* ===== LISTA EMPILHADA ===== */
-  .list{ display:grid; gap: clamp(12px,3vw,16px); }
-
-  .card{
-    position:relative;
-    background:var(--tile);
-    border:1px solid var(--tile-brd);
-    border-radius:22px;
-    box-shadow: var(--shadow);
-    padding: clamp(14px,3.6vw,18px);
-  }
-
-  .badge{
-    position:absolute; top:10px; right:12px;
-    background:#0b4c59; color:#fff; font-weight:700;
-    padding:6px 10px; border-radius:999px; font-size: clamp(12px,3.2vw,14px);
-    box-shadow:0 6px 16px rgba(0,0,0,.15);
-  }
-
-  .imgwrap{
-    height: clamp(160px,38vw,220px);
-    display:grid; place-items:center;
-    background: linear-gradient(#f3fbfb,#e5f3f1);
-    border-radius:18px; border:1px dashed #cdd9d9;
-    margin-bottom: clamp(10px,2.6vw,14px);
+  .app{
+    width:100%;
+    max-width:420px;   /* mesmo tamanho do index */
+    background:#fff;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
     overflow:hidden;
   }
-  .imgwrap img{
-    width: 92%; height: auto; object-fit: contain;
-    filter: drop-shadow(0 8px 18px rgba(0,0,0,.18));
+  header{
+    background:var(--brand-dark);
+    padding:18px;
+    text-align:center;
+    color:#fff;
+    font-weight:700;
+    font-size:1.2rem;
+  }
+  main{
+    padding:16px;
+    background:linear-gradient(180deg, var(--brand-mid) 0%, var(--brand-mid) 15%, transparent 15%);
   }
 
-  .h{
-    text-align:center; line-height:1.1; margin:6px 0 2px;
-    font-weight:900; letter-spacing:.3px; font-size: clamp(18px,4.6vw,22px);
+  .card{
+    background:var(--tile);
+    border:1px solid var(--tile-brd);
+    border-radius:16px;
+    padding:14px;
+    margin-bottom:14px;
+    box-shadow:var(--shadow);
+    text-align:center;
   }
-  .sub{ text-align:center; opacity:.8; font-weight:700; font-size: clamp(13px,3.6vw,15px); margin:0 0 10px }
-
+  .card img{
+    max-width:100%;
+    height:120px;  /* reduzido para caber igual index */
+    object-fit:contain;
+    margin-bottom:8px;
+  }
+  .card h3{
+    margin:4px 0;
+    font-size:1rem;
+    font-weight:800;
+  }
+  .card p{
+    margin:0 0 10px;
+    font-size:.9rem;
+    font-weight:600;
+    opacity:.85;
+  }
   .btn{
-    display:block; width:100%;
-    border:0; border-radius:14px; padding: clamp(14px,4vw,16px);
-    background:#0b4c59; color:#fff; font-weight:900; letter-spacing:.4px;
-    cursor:pointer; text-decoration:none; text-align:center; font-size: clamp(15px,3.8vw,18px);
-    box-shadow:0 10px 20px rgba(1,61,53,.22);
-    transition: transform .06s ease, filter .2s ease;
+    display:block;
+    width:100%;
+    background:var(--brand-dark);
+    color:#fff;
+    text-decoration:none;
+    font-weight:700;
+    border-radius:12px;
+    padding:10px;
+    transition:.2s;
   }
-  .btn:hover{ filter:brightness(1.06) }
-  .btn:active{ transform: translateY(1px) }
+  .btn:hover{filter:brightness(1.08);}
 </style>
 </head>
 <body>
-  <div class="phone">
-    <div class="screen">
-      <header class="topbar">
-        <h1 class="title">APP FROTA DEEP</h1>
-      </header>
+  <div class="app">
+    <header>CHECKLIST</header>
+    <main>
+      <!-- 07 ton GLP -->
+      <div class="card">
+        <img src="assets/glp-07t.png" alt="Empilhadeira 07 ton GLP">
+        <h3>07 ton</h3>
+        <p>GLP</p>
+        <a href="./checklist_glp07.html" class="btn">Selecionar</a>
+      </div>
 
-      <main class="content">
-        <section class="list" aria-label="Modelos de empilhadeira">
-          <!-- 07 ton GLP -->
-          <article class="card">
-            <span class="badge">GLP</span>
-            <div class="imgwrap">
-              <img src="assets/glp-07t.png" alt="Empilhadeira 07 toneladas GLP" />
-            </div>
-            <h3 class="h">07 ton</h3>
-            <p class="sub">GLP</p>
-            <a class="btn" href="./checklist_glp07.html">Selecionar</a>
-          </article>
+      <!-- 16 ton Diesel -->
+      <div class="card">
+        <img src="assets/diesel-16t.png" alt="Empilhadeira 16 ton Diesel">
+        <h3>16 ton</h3>
+        <p>Diesel</p>
+        <a href="./checklist_diesel16.html" class="btn">Selecionar</a>
+      </div>
 
-          <!-- 16 ton Diesel -->
-          <article class="card">
-            <span class="badge">DIESEL</span>
-            <div class="imgwrap">
-              <img src="assets/diesel-16t.png" alt="Empilhadeira 16 toneladas Diesel" />
-            </div>
-            <h3 class="h">16 ton</h3>
-            <p class="sub">Diesel</p>
-            <a class="btn" href="./checklist_diesel16.html">Selecionar</a>
-          </article>
-
-          <!-- 16 ton Elétrica -->
-          <article class="card">
-            <span class="badge">ELÉTRICA</span>
-            <div class="imgwrap">
-              <img src="assets/eletrica-16t.png" alt="Empilhadeira 16 toneladas Elétrica" />
-            </div>
-            <h3 class="h">16 ton</h3>
-            <p class="sub">Elétrica</p>
-            <a class="btn" href="./checklist_eletrica16.html">Selecionar</a>
-          </article>
-        </section>
-      </main>
-    </div>
+      <!-- 16 ton Elétrica -->
+      <div class="card">
+        <img src="assets/eletrica-16t.png" alt="Empilhadeira 16 ton Elétrica">
+        <h3>16 ton</h3>
+        <p>Elétrica</p>
+        <a href="./checklist_eletrica16.html" class="btn">Selecionar</a>
+      </div>
+    </main>
   </div>
 </body>
 </html>

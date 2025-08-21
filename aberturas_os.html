@@ -28,6 +28,27 @@
     .actions{margin-top:8px}
     .btn{width:100%;border:0;border-radius:12px;padding:28px 16px;font-weight:800;font-size:24px;color:#fff;background:var(--brand-dark);box-shadow:0 6px 14px rgba(1,61,53,.2);cursor:pointer}
     .btn:hover{filter:brightness(1.06)} .btn:active{transform:translateY(1px)}
+
+    .tile{
+  	background-color:#3db7ac;
+    }
+  
+    a.tile{
+      display:flex; align-items:center; justify-content:center;
+      background-color:#7BD3CB;
+      border-radius: 14px;
+      margin-top:8px;
+      padding: clamp(20px, 5vw, 28px);
+      text-decoration:none; color:inherit;
+      box-shadow: var(--shadow);
+      font-weight:800; letter-spacing:.3px;
+      font-size: clamp(16px, 3.8vw, 22px);    
+      transition: transform .08s ease, box-shadow .2s ease, background .2s ease;
+    }
+    a.tile:hover{ box-shadow:0 12px 28px rgba(0,0,0,.12); background:#cfeeed }
+    a.tile:active{ transform: scale(.985) }
+    a.tile *{ pointer-events:none }
+      
     @media (max-width:420px){.app{padding:12px}.radio-group{grid-template-columns:1fr}}
   </style>
 </head>
